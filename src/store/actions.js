@@ -23,4 +23,11 @@ export function setcategories(categories) {
     };
   }
       
-      
+  export const SET_CHOSENPROJECT = "SET_CHOSENPROJECT";
+  export function setchosenproject(project) {
+      return {
+        type: SET_CHOSENPROJECT,
+        payload: project
+      };
+    }
+  

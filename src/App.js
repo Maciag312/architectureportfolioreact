@@ -5,17 +5,18 @@ import Projectview from './Projectview';
 import {createStore} from 'redux';
 import mainReducer from './store/reducers';
 import { Provider } from 'react-redux';
+import Home from "./Home";
 import './fontpack.css';
+import Contactandaboutview from './Contactandaboutview';
 const store = createStore(mainReducer);
 function App() {
   return (
     <div>
       <Provider store = {store}>
-        <div style={{paddingLeft: "10%", paddingTop:"12px", paddingBottom: "8px",  fontSize:"28px", fontFamily: "Quicksand"}}>
-          KRZYSZTOF PRZYBYŁO
-        </div>
-
+      
               <MenuBar></MenuBar>
+              <Contactandaboutview></Contactandaboutview>
+              <Home></Home>
               <Projectview></Projectview>
       </Provider>
     </div>

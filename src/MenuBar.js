@@ -1,12 +1,13 @@
 import React from 'react';
-import {setview, setcategories, setprojects} from './store/actions';
+import {setview, setcategories, setprojects, setchosenproject} from './store/actions';
 import {connect} from 'react-redux';
 import './fontpack.css';
 import './transform.css';
 import { CSSTransition } from 'react-transition-group';
-import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 import styled from 'styled-components';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+
 
 const sliderThumbStyles = (props) => (`
         width: 4px;
@@ -16,6 +17,7 @@ const sliderThumbStyles = (props) => (`
         -webkit-transition: .3s;
         transition: all .3s;
 `)
+
 
 const Styles = styled.div`
 color: #FF0000;
@@ -45,6 +47,8 @@ align-items: center;
 
 
 function MenuBar(props) {
+    // eslint-disable-next-line
+    const matches = useMediaQuery('(min-width:600px)');
     const [clickedProjects, setClickedProjects] = React.useState(true);
     const [clickedAbout, setClickedAbout] = React.useState(false);
     const [clickedContact, setClickedContact] = React.useState(false);
@@ -59,16 +63,17 @@ function MenuBar(props) {
         var tcat = cat.find(p=>p.selected===true);
         tcat.selected = false;
         cat[val].selected=true;
-        setcategories(cat)
+        props.setcategories(cat)
         setCategoryElements(cat.map(c=><div onClick={handleCategoryClick(c.id)} className='transform disable-select' style={{cursor: "pointer", color: c.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{c.name}</div>))
         if(tcat.id!==val){
             const va = props.projects.filter(p=>p.catg===val)[0].id
             var projcs = props.projects;
             projcs.find(p=>p.selected===true).selected=false;
             projcs[va].selected=true;
-            setprojects(projcs)
+            props.setchosenproject(projcs[va])
+            props.setprojects(projcs)
             const fdprojects = projcs.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id)
-            setProjectElements(fdprojects.map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{p.name}</div>))
+            setProjectElements(fdprojects.map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float:"left"}}>{p.name}</div>))
             setSlidervalue(fdprojects[0].id)
         }
 
@@ -79,26 +84,29 @@ function MenuBar(props) {
         var projcs = props.projects;
         projcs.find(p=>p.selected===true).selected=false;
         projcs[val].selected=true; 
-        setprojects(projcs)
-        setProjectElements(projcs.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id).map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{p.name}</div>))
+        props.setchosenproject(projcs[val])
+        props.setprojects(projcs)
+        setProjectElements(projcs.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id).map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float:"left"}}>{p.name}</div>))
         setSlidervalue(val)
     }
-    const [projectElements, setProjectElements] = React.useState(props.projects.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id).map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{p.name}</div>))
+    const [projectElements, setProjectElements] = React.useState(props.projects.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id).map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float:"left"}}>{p.name}</div>))
 
-    const [volume, setVolume] = React.useState(10)
+
 
     const updateProjectsAndCategories=(project_id) => {
         var val = project_id
         var projcs = props.projects;
         projcs.find(p=>p.selected===true).selected=false;
+        console.log(val+"project to be updated")
         projcs[val].selected=true; 
+        props.setchosenproject(projcs[val])
         var chosenCategory = projcs[val].catg;
         props.categories.find(c=>c.selected===true).selected=false;
         var ctgs = props.categories;
         ctgs[chosenCategory].selected=true;
-        setcategories(ctgs);
+        props.setcategories(ctgs);
         setCategoryElements(ctgs.map(c=><div onClick={handleCategoryClick(c.id)} className='transform disable-select' style={{cursor: "pointer", color: c.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{c.name}</div>))
-        setprojects(projcs)
+        props.setprojects(projcs)
         setProjectElements(projcs.filter(e=>e.catg===props.categories.find(c=>c.selected===true).id).map(p=><div className='transform disable-select' onClick={handleProjectClick(p.id)} value={p.id} style={{cursor: "pointer", color: p.selected===true? "black":"lightgrey", paddingLeft: "15px", float: "left"}}>{p.name}</div>))
         setSlidervalue(val)
 
@@ -113,31 +121,42 @@ function MenuBar(props) {
         setClickedContact(false)
         setClickedProjects(false)
         if(val==='p'){
+            props.setview("projects")
             setClickedProjects(true)
         }else if(val==='a'){
+            props.setview("about")
             setClickedAbout(true)
         }else{
+            props.setview("contact")
+
             setClickedContact(true)
         }
     }
     const handleArrowClick = (v) => (e) =>{
+        if(v>=0||v<props.projects.length)
         updateProjectsAndCategories(v)
     }
     return (
+        <div>
+        <div  className='transform disable-select' onClick={()=>props.setview("home")} style={{paddingLeft: "calc(15% - 50px)", paddingTop:"12px", cursor: "pointer", paddingBottom: "8px",  fontSize:"28px", fontFamily: "Quicksand"}}>
+          KRZYSZTOF PRZYBYŁO
+        </div>
         <div style={{width: "100%", display: "inline", backgroundColor: "red", textAlign:"center", fontFamily: "Quicksand", fontSize: "21px"}}>
             <hr style ={{border: "0.5px solid lightgrey"}}></hr>
-                <div className='transform disable-select' onClick={handleClick('p')} value="projects"style={{float: "left", width: "28%", cursor: "pointer", color: clickedProjects===true ? "black":"lightgrey"}}>PROJECTS</div>
-                <div  className='transform disable-select' onClick={handleClick('a')} value="about" style={{float: "left", width: "43.5%",cursor: "pointer", color: clickedAbout===true ? "black":"lightgrey"}}>ABOUT</div>
-                <div  className='transform disable-select' onClick={handleClick('c')} value="contact" style={{float: "left", width: "28%",cursor: "pointer", color: clickedContact===true ? "black":"lightgrey"}}>CONTACT</div>
+                <div className='transform disable-select' onClick={handleClick('p')} value="projects"style={{float: "left", width: "30%", cursor: "pointer", color: clickedProjects===true ? "black":"lightgrey"}}>PROJECTS</div>
+                <div  className='transform disable-select' onClick={handleClick('a')} value="about" style={{float: "left", width: "40%",cursor: "pointer", color: clickedAbout===true ? "black":"lightgrey"}}>ABOUT</div>
+                <div  className='transform disable-select' onClick={handleClick('c')} value="contact" style={{float: "left", width: "30%",cursor: "pointer", color: clickedContact===true ? "black":"lightgrey"}}>CONTACT</div>
                 <br></br>
-
-
                 <CSSTransition
-                    in={clickedProjects}
-                    timeout={300}
+                    in={clickedProjects&&(props.view!="home")}
+                    timeout={{
+                        appear: 200,
+                        enter: 400,
+                        exit: 0,
+                       }}
                     classNames="alert"
                     unmountOnExit
-                    style={{float: "left", textAlign: "left", paddingLeft: "calc(16% - 70px)", width: "80%", fontSize: "20px"}}>
+                    style={{float: "left", textAlign: "left", paddingLeft: "calc(16% - 70px)", width: "calc(84% + 35px)", fontSize: "calc(14px + 0.35rem)"}}>
                     <div style={{display: "inline"}}>
                         {categoryElements}
                     </div>
@@ -146,11 +165,15 @@ function MenuBar(props) {
 
 
                 <CSSTransition
-                    in={clickedProjects}
-                    timeout={300}
-                    classNames="alert"
+                    in={clickedProjects&&(props.view!="home")}
+                    timeout={{
+                        appear: 200,
+                        enter: 400,
+                        exit: 0,
+                       }}
+                     classNames="alert"
                     unmountOnExit
-                    style={{float: "left",textAlign: "left", paddingLeft: "calc(16% - 63px)", width: "80%", fontSize: "20px"}}>
+                    style={{float: "left",textAlign: "left", paddingLeft: "calc(16% - 63px)", width: "calc(84% + 31px)", fontSize: "calc(14px + 0.35rem)"}}>
                     <div style={{display: "inline"}}>
                       {projectElements}
                     </div>
@@ -159,14 +182,19 @@ function MenuBar(props) {
                 <br></br>
 
                 <CSSTransition
-                    in={clickedProjects}
-                    timeout={300}
+                    in={clickedProjects&&(props.view!="home")}
+                    timeout={{
+                        appear: 200,
+                        enter: 400,
+                        exit: 0,
+                       }}
                     classNames="alert"
                     unmountOnExit
-                    style = {{width: "35%", paddingTop: "30px", marginLeft: "auto", marginRight: "auto"}}>
+                    style = {{width: "calc(250px + 18vw)", paddingTop: "calc(50px - 0.5vw)", paddingBottom: "calc(30px - 2vw)", marginLeft: "auto", marginRight: "auto"}}>
+                        <div>
                         <div style={{display: "inline"}}> 
 
-                            <Styles opacity={0.5+slidervalue/20} color={"lightgrey"}>
+                            <Styles opacity={0.5+slidervalue/20} color={"lightgrey"} style={{width: "100%"}}>
                                 <div style = {{fontFamily:"DM Sans", color: "lightgrey", fontSize: "28px", cursor: "pointer"}} className="disable-select" onClick={handleArrowClick(slidervalue<=0? slidervalue:slidervalue-1)} >
                                     &lt;
                                 </div>
@@ -177,9 +205,11 @@ function MenuBar(props) {
                             </Styles>
                           
                         </div>
+                        </div>
                         
                 </CSSTransition>
 
+        </div>
         </div>
     );
 }
@@ -187,10 +217,11 @@ function MenuBar(props) {
 const mapStateToProps = (state) => ({
     view: state.view,
     projects: state.projects,
-    categories: state.categories
+    categories: state.categories,
+    chosenproject: state.chosenproject
   });
   
 export default connect(
     mapStateToProps,
-    {setview,setcategories, setprojects}
+    {setview,setcategories, setprojects, setchosenproject}
   )(MenuBar);
