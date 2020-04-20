@@ -21,9 +21,8 @@ function Contactandaboutview(props) {
                     unmountOnExit
                     classNames="alert"
 
-                    style={{marginLeft:"auto", marginRight: "auto" , fontSize: "calc(14px + 0.35rem)", paddingTop: "calc(120px + 8vw)"}}>
-                    <div>
-                    Feel free to contact me <span>😊</span> 
+                    style={{marginLeft:"auto", marginRight: "auto" , fontSize: "calc(14px + 0.35rem)", paddingTop: "calc(100px + 5vw)"}}>
+                    <div>Feel free to contact me  <span role="img" aria-label="smile">😊</span>
                         <br></br>
 
                         <a href="mailto:chris.krzysiek.przybylo@gmail.com">
@@ -65,7 +64,7 @@ function Contactandaboutview(props) {
                     style={{marginLeft:"auto", marginRight: "auto" , fontSize: "calc(14px + 0.35rem)", paddingLeft: "calc(10% - 50px)"}}>
                     <div>
                         
-                       <div style = {{width: "40%", textAlign:"left", float: "left"}}>
+                       <div style = {{width: "calc(250px + 25vw)", textAlign:"left", float: "left", margin: "0 15px 0 15px"}}>
                            <p>My name is Krzysztof Przybyło and I'm a third-year-student of Architecture (Technical University of Gliwice). At the moment, I'm taking part in Erasmus + programme and studying at the University of Lisbon (Lisbon, Portugal).
 </p>
 <p>

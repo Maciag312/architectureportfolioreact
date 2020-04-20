@@ -29,14 +29,6 @@ function Home(props) {
     // const imgbw = images('./' + this.props.chosenproject.imgbw);
     // const img = images('./' + this.props.chosenproject.img);
 
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            handleCounterChange(c+1)
-        }, 3400);
-        return () => handleCounterChange(c+1);
-      }, []);
-
     const handleCounterChange = (coutr) => {
         if(coutr>=maxcounter) c = 0
         else c = coutr
@@ -44,14 +36,24 @@ function Home(props) {
         console.log(c)
     }
 
+    useEffect(() => {
+        setInterval(() => {
+            handleCounterChange(c+1)
+        }, 3400);
+        return () => handleCounterChange(c+1);
+        // eslint-disable-next-line 
+      }, []);
+
+    
+
     return (
         <div>
-        {props.view=="home"? 
+        {props.view==="home"? 
             <div style={{width: "100%",marginLeft:"auto", marginRight: "auto", textAlign:"center", fontFamily: "Quicksand", fontSize: "21px", position: "relative"}}>
                 <div>
                     {homeElements.map((e,i)=>
-                    <svg style={{width: "30", height: "4", paddingLeft:"8px"}} >
-                        <rect className="transform2" style={{width: "30", height: "4", fill: counter==i? "grey" : "lightgrey"}}></rect>
+                    <svg style={{width: "30", height: "4", paddingLeft:"8px", paddingBottom:"22px"}} >
+                        <rect className="transform2" style={{width: "30", height: "4", fill: counter===i? "grey" : "lightgrey"}}></rect>
                     </svg> 
                     )}
 
@@ -59,7 +61,7 @@ function Home(props) {
                 {homeElements.map((e,i)=>
                     <CSSTransition
                     
-                    in={counter==i}
+                    in={counter===i}
                     timeout={{
                         appear: 600,
                         enter: 400,
@@ -70,11 +72,11 @@ function Home(props) {
 
                     style={{marginLeft:"auto", textAlign:"left", marginRight: "auto" , width:"100%", fontSize: "calc(14px + 0.35rem)", paddingTop: "calc(10px + 2vw)", position:"absolute", top: "0"}}>
                         <div>
-                        <div style={{fontSize: "calc(16px + 0.5vw)", paddingLeft:"calc(10vw - 50px)", paddingBottom: "15px"}}>{e.title}</div>
-                        <div style={{fontSize: "calc(16px + 0.5vw)", paddingLeft:"calc(11vw - 48px)", paddingBottom: "15px", color:"lightgrey", fontSize: "18px"}}>{e.sdesc}</div>
+                        <div style={{fontSize: "calc(16px + 0.5vw)", paddingLeft:"calc(10vw - 25px)", paddingBottom: "3px"}}>{e.title}</div>
+                        <div style={{fontSize: "calc(16px + 0.4vw)", paddingLeft:"calc(11vw - 25px)", paddingBottom: "15px", color:"lightgrey"}}>{e.sdesc}</div>
 
                         <div id="container" style={{position: "relative", height: "calc(32vw + 60px)",marginLeft: "auto", marginRight: "auto"}}>
-                            <HoverLazyLoadImage className="transform2" alt = "" src={images('./' + e.img)} style={{position: "absolute",top: 0,height: "calc(32vw + 60px)", width: "calc(80vw + 100px)", left: "calc(10% - 50px)", display: "block", objectFit: "cover", opacity: 1}}></HoverLazyLoadImage>
+                            <HoverLazyLoadImage className="transform2" alt = "" src={images('./' + e.img)} style={{position: "absolute",top: 0,height: "calc(32vw + 60px)", width: "calc(80vw + 50px)", left: "calc(10% - 25px)", display: "block", objectFit: "cover", opacity: 1}}></HoverLazyLoadImage>
                         
                         </div>
                         <div></div>

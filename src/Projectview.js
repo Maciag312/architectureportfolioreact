@@ -43,7 +43,6 @@ class Projectview extends React.Component {
           document.documentElement.clientHeight
       
         const scrolled = winScroll / height
-        const movescr = winScroll
       console.log(scrolled)
         this.setState({
           theposition: scrolled,
@@ -84,17 +83,17 @@ class Projectview extends React.Component {
                     unmountOnExit
                     style={{textAlign: "left", marginLeft: "auto", marginRight: "auto", width: "100%", fontSize: "20px", visibility: (!this.state.show&&(this.props.view==="projects"))? "visible":"hidden"}}>
                     <div style={{display: "inline"}}>
-                    <div style={{fontSize: "calc(16px + 0.5vw)", width: "calc(80% + 100px)", paddingBottom: "15px", marginLeft: "calc(10% - 50px)", paddingTop: (this.state.theposition*this.state.theposition*100).toString()+"px"}}>{this.props.chosenproject.title}</div>
+                    <div style={{fontSize: "calc(16px + 0.5vw)", width: "calc(80% + 100px)", paddingBottom: "15px", marginLeft: "calc(10% - 25px)", paddingTop: (this.state.theposition*this.state.theposition*100).toString()+"px"}}>{this.props.chosenproject.title}</div>
                     <div id="container" style={{position: "relative", height: "calc(32vw + 60px)"}}>
-                    <LazyLoadImage alt = ""  src={img} style={{position: "absolute", top: 0,height: "calc(32vw + 60px)", width: "calc(80% + 100px)", left: "calc(10% - 50px)",display: "block", objectFit: "cover", filter: "grayscale("+ (100-this.state.movescr/3)+"%)"}}></LazyLoadImage>
+                    <LazyLoadImage alt = ""  src={img} style={{position: "absolute", top: 0,height: "calc(32vw + 60px)", width: "calc(80% + 50px)", left: "calc(10% - 25px)",display: "block", objectFit: "cover", filter: "grayscale("+ (100-this.state.movescr/3)+"%)"}}></LazyLoadImage>
 
                     </div>
                     
-                    <div style={{float: "left", textAlign: "left", paddingTop: "20px", paddingLeft: "calc(10% - 50px)", width: "calc(80% + 100px)", fontSize: "calc(14px + 0.35rem)"}}>
+                    <div style={{float: "left", textAlign: "left", paddingTop: "20px", paddingLeft: "calc(10% - 25px)", width: "calc(80% + 50px)", fontSize: "calc(14px + 0.35rem)"}}>
                             {this.props.chosenproject.desc}
                         </div>
-                        {this.props.chosenproject.scheme != "dummy.png"?
-                        <div style={{height: "calc(45vw + 300px)", width: "calc(80% + 100px)",marginLeft: "calc(10% - 50px)", paddingTop:"200px"}}>
+                        {this.props.chosenproject.scheme !== "dummy.png"?
+                        <div style={{height: "calc(45vw + 300px)", width: "calc(80% + 50px)",marginLeft: "calc(10% - 25)", paddingTop:"200px"}}>
                             {isMobile?
                                 <a 
                                 href={images("./" + this.props.chosenproject.scheme)}
@@ -103,7 +102,7 @@ class Projectview extends React.Component {
                                 style={{paddingLeft: "calc(12% - 30px)"}}
                                 >
                                 <i>
-                                Zobacz Projekt
+                                View schema
                                 </i>
                                 </a>
                             :
@@ -133,17 +132,17 @@ class Projectview extends React.Component {
                     unmountOnExit
                     style={{textAlign: "left", marginLeft: "auto", marginRight: "auto", width: "100%", fontSize: "20px", visibility: (this.state.show&&this.props.view==="projects")? "visible":"hidden"}}>
                     <div style={{display: "inline"}}>
-                    <div style={{fontSize: "calc(16px + 0.5vw)", width: "calc(80% + 100px)", paddingBottom: "15px", marginLeft: "calc(10% - 50px)", paddingTop: (this.state.theposition*this.state.theposition*100).toString()+"px"}}>{this.props.chosenproject.title}</div>
+                    <div style={{fontSize: "calc(16px + 0.5vw)", width: "calc(80% + 100px)", paddingBottom: "15px", marginLeft: "calc(10% - 25px)", paddingTop: (this.state.theposition*this.state.theposition*100).toString()+"px"}}>{this.props.chosenproject.title}</div>
                     <div id="container" style={{position: "relative", height: "calc(32vw + 60px)"}}>
-                         <LazyLoadImage alt = ""  src={img} style={{position: "absolute", top: 0,height: "calc(32vw + 60px)", width: "calc(80% + 100px)", left: "calc(10% - 50px)",display: "block", objectFit: "cover", filter: "grayscale("+ (100-this.state.movescr/3)+"%)"}}></LazyLoadImage>
+                         <LazyLoadImage alt = ""  src={img} style={{position: "absolute", top: 0,height: "calc(32vw + 60px)", width: "calc(80% + 50px)", left: "calc(10% - 25px)",display: "block", objectFit: "cover", filter: "grayscale("+ (100-this.state.movescr/3)+"%)"}}></LazyLoadImage>
                        
                     </div>
                     
-                    <div style={{float: "left", textAlign: "left", paddingTop: "20px", paddingLeft: "calc(10% - 50px)", width: "calc(80% + 100px)", fontSize: "calc(14px + 0.35rem)"}}>
-                            {this.props.chosenproject.sdesc+this.props.chosenproject.desc}
+                    <div style={{float: "left", textAlign: "left", paddingTop: "20px", paddingLeft: "calc(10% - 25px)", width: "calc(80% + 50px)", fontSize: "calc(14px + 0.35rem)"}}>
+                            {this.props.chosenproject.desc}
                         </div>
-                        {this.props.chosenproject.scheme != "dummy.png"?
-                        <div style={{height: "calc(45vw + 300px)", width: "calc(80% + 100px)",marginLeft: "calc(10% - 50px)", paddingTop:"200px"}}>
+                        {this.props.chosenproject.scheme !== "dummy.png"?
+                        <div style={{height: "calc(45vw + 300px)", width: "calc(80% + 50px)",marginLeft: "calc(10% - 25px)", paddingTop:"200px"}}>
                             {isMobile?
                                 <a 
                                 href={images("./" + this.props.chosenproject.scheme)}
@@ -152,7 +151,7 @@ class Projectview extends React.Component {
                                 style={{paddingLeft: "calc(12% - 30px)"}}
                                 >
                                 <i>
-                                Zobacz Projekt
+                                View schema
                                 </i>
                                 </a>
                             :

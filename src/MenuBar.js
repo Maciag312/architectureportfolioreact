@@ -148,7 +148,7 @@ function MenuBar(props) {
                 <div  className='transform disable-select' onClick={handleClick('c')} value="contact" style={{float: "left", width: "30%",cursor: "pointer", color: clickedContact===true ? "black":"lightgrey"}}>CONTACT</div>
                 <br></br>
                 <CSSTransition
-                    in={clickedProjects&&(props.view!="home")}
+                    in={clickedProjects&&(props.view!=="home")}
                     timeout={{
                         appear: 200,
                         enter: 400,
@@ -165,7 +165,7 @@ function MenuBar(props) {
 
 
                 <CSSTransition
-                    in={clickedProjects&&(props.view!="home")}
+                    in={clickedProjects&&(props.view!=="home")}
                     timeout={{
                         appear: 200,
                         enter: 400,
@@ -182,7 +182,7 @@ function MenuBar(props) {
                 <br></br>
 
                 <CSSTransition
-                    in={clickedProjects&&(props.view!="home")}
+                    in={clickedProjects&&(props.view!=="home")}
                     timeout={{
                         appear: 200,
                         enter: 400,
