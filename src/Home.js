@@ -66,7 +66,7 @@ function Home(props) {
                     unmountOnExit
                     classNames="alert"
 
-                    style={{marginLeft:"auto", textAlign:"left", marginRight: "auto" , width:"100%", fontSize: "calc(14px + 0.35rem)", paddingTop: "calc(10px + 2vw)", position:"absolute", top: "0"}}>
+                    style={{marginLeft:"auto", textAlign:"left", marginRight: "auto" , width:"100%", fontSize: "calc(14px + 0.35rem)", paddingTop: "calc(50px + 1vw)", position:"absolute", top: "0"}}>
                         <div>
                         <div style={{fontSize: "calc(16px + 0.5vw)", paddingLeft:"calc(10vw - 25px)", paddingBottom: "3px"}}>{e.title}</div>
                         <div style={{fontSize: "calc(16px + 0.4vw)", paddingLeft:"calc(11vw - 25px)", paddingBottom: "15px", color:"lightgrey"}}>{e.sdesc}</div>
