@@ -106,11 +106,13 @@ function Contactandaboutview(props) {
                                 <p>
 
                                 I am working with:
-                                <img style = {{margin: "0 5px 0 5px"}} src={autodesk} alt="Autocad"></img>
-                                <img style = {{margin: "0 5px"}} src={tdmax} alt="3ds max"></img>
-                                <img style = {{margin: "0 5px"}} src={corona} alt="Corona"></img>
-                                <img style = {{margin: "0 5px"}} src={archicad} alt="Archicad"></img>
-                                <img style = {{margin: "0 5px"}} src={ps} alt="Photoshop"></img>
+                                <br></br>
+                                <br></br>
+                                <img style = {{margin: "0 7px 0 5px"}} src={autodesk} alt="Autocad"></img>
+                                <img style = {{margin: "0 7px"}} src={tdmax} alt="3ds max"></img>
+                                <img style = {{margin: "0 7px"}} src={corona} alt="Corona"></img>
+                                <img style = {{margin: "0 7px"}} src={archicad} alt="Archicad"></img>
+                                <img style = {{margin: "0 7px"}} src={ps} alt="Photoshop"></img>
 
                     
                             </p>
