@@ -46,8 +46,8 @@ function Contactandaboutview(props) {
                     <div>Feel free to contact me  <span role="img" aria-label="smile">😊</span>
                         <br></br>
 
-                        <a href="mailto:chris.krzysiek.przybylo@gmail.com">
-                        chris.krzysiek.przybylo@gmail.com
+                        <a href="mailto:krzysztof.przybylo.arch@gmail.com">
+                        krzysztof.przybylo.arch@gmail.com
                         </a>
                         <br></br>
 

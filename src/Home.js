@@ -59,9 +59,9 @@ function Home(props) {
                     
                     in={counter===i}
                     timeout={{
-                        appear: 600,
-                        enter: 400,
-                        exit: 200,
+                        appear: 1400,
+                        enter: 1400,
+                        exit: 1400,
                        }}
                     unmountOnExit
                     classNames="alert"
@@ -72,7 +72,7 @@ function Home(props) {
                         <div style={{fontSize: "calc(16px + 0.4vw)", paddingLeft:"calc(11vw - 25px)", paddingBottom: "15px", color:"lightgrey"}}>{e.sdesc}</div>
 
                         <div id="container" style={{position: "relative", height: "calc(32vw + 60px)",marginLeft: "auto", marginRight: "auto"}}>
-                            <HoverLazyLoadImage className="transform2" alt = "" src={images('./' + e.img)} style={{position: "absolute",top: 0,height: "calc(32vw + 60px)", width: "calc(80vw + 50px)", left: "calc(10% - 25px)", display: "block", objectFit: "cover", opacity: 1}}></HoverLazyLoadImage>
+                            <HoverLazyLoadImage className="transform3" alt = "" src={images('./' + e.img)} style={{position: "absolute",top: 0,height: "calc(32vw + 60px)", width: "calc(80vw + 50px)", left: "calc(10% - 25px)", display: "block", objectFit: "cover", opacity: 1}}></HoverLazyLoadImage>
                         
                         </div>
                         <div></div>
