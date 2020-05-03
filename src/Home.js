@@ -42,22 +42,18 @@ function Home(props) {
         }, 3400);
         return () => handleCounterChange(c+1);
         // eslint-disable-next-line 
-      }, []);
+      }, [c]);
 
-    
+ 
 
     return (
         <div>
         {props.view==="home"? 
             <div style={{width: "100%",marginLeft:"auto", marginRight: "auto", textAlign:"center", fontFamily: "Quicksand", fontSize: "21px", position: "relative"}}>
-                <div>
-                    {homeElements.map((e,i)=>
-                    <svg style={{width: "30", height: "4", paddingLeft:"8px", paddingBottom:"22px"}} >
-                        <rect className="transform2" style={{width: "30", height: "4", fill: counter===i? "grey" : "lightgrey"}}></rect>
-                    </svg> 
-                    )}
+                {homeElements.map((e,i)=>
+                    <img alt="" onClick={()=>handleCounterChange(i)} className="transform2" src={counter===i?images("./greyb.png"):images("./lgreyb.png")} style={{paddingLeft: "8px", width: "30", height: ""}}></img>
+                )}
 
-                </div>   
                 {homeElements.map((e,i)=>
                     <CSSTransition
                     

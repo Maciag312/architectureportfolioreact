@@ -143,9 +143,9 @@ function MenuBar(props) {
         </div>
         <div style={{width: "100%", display: "inline", backgroundColor: "red", textAlign:"center", fontFamily: "Quicksand", fontSize: "21px"}}>
             <hr style ={{border: "0.5px solid lightgrey"}}></hr>
-                <div className='transform disable-select' onClick={handleClick('p')} value="projects"style={{float: "left", width: "30%", cursor: "pointer", color: clickedProjects===true ? "black":"lightgrey"}}>PROJECTS</div>
-                <div  className='transform disable-select' onClick={handleClick('a')} value="about" style={{float: "left", width: "40%",cursor: "pointer", color: clickedAbout===true ? "black":"lightgrey"}}>ABOUT</div>
-                <div  className='transform disable-select' onClick={handleClick('c')} value="contact" style={{float: "left", width: "30%",cursor: "pointer", color: clickedContact===true ? "black":"lightgrey"}}>CONTACT</div>
+                <div className='transform disable-select' onClick={handleClick('p')} value="projects"style={{float: "left", width: "30%", cursor: "pointer", color: clickedProjects===true && props.view !=="home" ? "black":"lightgrey"}}>PROJECTS</div>
+                <div  className='transform disable-select' onClick={handleClick('a')} value="about" style={{float: "left", width: "40%",cursor: "pointer", color: clickedAbout===true && props.view !=="home"  ? "black":"lightgrey"}}>ABOUT</div>
+                <div  className='transform disable-select' onClick={handleClick('c')} value="contact" style={{float: "left", width: "30%",cursor: "pointer", color: clickedContact===true && props.view !=="home"  ? "black":"lightgrey"}}>CONTACT</div>
                 <br></br>
                 <CSSTransition
                     in={clickedProjects&&(props.view!=="home")}
@@ -195,11 +195,11 @@ function MenuBar(props) {
                         <div style={{display: "inline"}}> 
 
                             <Styles opacity={0.5+slidervalue/20} color={"lightgrey"} style={{width: "100%"}}>
-                                <div style = {{fontFamily:"DM Sans", color: "lightgrey", fontSize: "28px", cursor: "pointer"}} className="disable-select" onClick={handleArrowClick(slidervalue<=0? slidervalue:slidervalue-1)} >
+                                <div style = {{fontFamily:"DM Sans", color: "lightgrey", fontSize: "28px", cursor: "pointer"}} className="disable-select" onClick={handleArrowClick(slidervalue<=0? slidervalue:parseInt(slidervalue)-1)} >
                                     &lt;
                                 </div>
                                 <input ref={input => input && input.focus()} type='range' value = {slidervalue} min={0} max={props.projects.length-1} className='slider' onChange={handleOnChange}></input>
-                                <div style = {{fontFamily:"DM Sans", color: "lightgrey", fontSize: "28px", cursor: "pointer"}} className="disable-select" onClick={handleArrowClick(slidervalue>=props.projects.length-1? slidervalue:slidervalue+1)}>
+                                <div style = {{fontFamily:"DM Sans", color: "lightgrey", fontSize: "28px", cursor: "pointer"}} className="disable-select" onClick={handleArrowClick(slidervalue>=props.projects.length-1? slidervalue:parseInt(slidervalue)+1)}>
                                     &gt;
                                 </div>
                             </Styles>
